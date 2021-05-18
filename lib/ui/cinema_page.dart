@@ -1,8 +1,8 @@
 import 'package:cinema/api/DioServie.dart';
-import 'package:cinema/main.dart';
 import 'package:cinema/model/Cinema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cinema/ui/widgets/CustomAppBar.dart';
 
 class CinemaPage extends StatefulWidget {
   @override
@@ -14,9 +14,7 @@ class _CinemaPageState extends State<CinemaPage> {
   Widget build(BuildContext context) {
     //TODO translation
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Cinemas"),
-      ),
+      appBar: CustomAppBar(context),
       body: FutureBuilder(
         future: RepositoryProvider.of<DioService>(context).getAllCinema(),
         builder: (context, snapshot) {
@@ -55,7 +53,10 @@ class _CinemaPageState extends State<CinemaPage> {
               ),
             );
           } else
-            return Center(child: CircularProgressIndicator());
+            return Center(
+                child: CircularProgressIndicator(
+              backgroundColor: Colors.yellow[600],
+            ));
         },
       ),
     );

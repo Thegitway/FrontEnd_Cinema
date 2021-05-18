@@ -8,6 +8,7 @@ class Cinema {
   double _latitude;
   double _altitude;
   int _nombreSalles;
+
   Cinema(this._id, this._name, this._longitude, this._latitude, this._altitude,
       this._nombreSalles);
 

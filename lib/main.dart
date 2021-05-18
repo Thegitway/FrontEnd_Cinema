@@ -19,35 +19,20 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          primaryColor: Color(0xFF3CB4AF),
+          primaryColor: Colors.yellow[400],
           //green darker
-          accentColor: Color(0xFF7ecec6),
+          accentColor: Colors.yellow[100],
+          fontFamily: 'HoKo',
           //grey dark
           hintColor: Color(0xFF838383),
           //green light
           buttonColor: Color(0xFF383838),
           //grey dark
           disabledColor: Color(0xFF666666),
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: MaterialColor(
-              0xFF3CB4AF,
-              <int, Color>{
-                50: Color(0xFF3CB4AF),
-                100: Color(0xFF3CB4AF),
-                200: Color(0xFF3CB4AF),
-                300: Color(0xFF3CB4AF),
-                400: Color(0xFF3CB4AF),
-                500: Color(0xFF3CB4AF),
-                600: Color(0xFF3CB4AF),
-                700: Color(0xFF3CB4AF),
-                800: Color(0xFF3CB4AF),
-                900: Color(0xFF3CB4AF),
-              },
-            ),
-          ),
           //grey light
           backgroundColor: Colors.grey,
         ),
+        debugShowCheckedModeBanner: false,
         home: CinemaPage(),
       ),
     );
