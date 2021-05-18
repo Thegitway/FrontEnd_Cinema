@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "822948897864",
+    "project_id": "cinema-4ef8e",
+    "storage_bucket": "cinema-4ef8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822948897864:android:a6a2be0b83e13ec8c0a47d",
+        "android_client_info": {
+          "package_name": "com.watch.cinema"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822948897864-u895hcei4ksnfms2k3ergcsuur4h1ig1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOFH2A2UeOUToq9ct8kOvfTJbxalTOVKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822948897864-u895hcei4ksnfms2k3ergcsuur4h1ig1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

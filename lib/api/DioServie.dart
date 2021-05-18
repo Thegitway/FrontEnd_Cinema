@@ -24,12 +24,19 @@ class DioService {
   }
 
   Future<List<Cinema>> getAllCinema() async {
-    dio = Dio();
-    var response = await dio.get("http://10.0.2.2:8080/cinema");
-    if (response.statusCode == 200) {
-      List<Cinema> cinema = [];
-      for (var data in response.data) cinema.add(Cinema.fromJson(data));
-      return cinema;
+    try {
+      dio = Dio();
+      var response = await dio.get(
+        "http://localhost:8080/cinema",
+      );
+
+      if (response.statusCode == 200) {
+        List<Cinema> cinema = [];
+        for (var data in response.data) cinema.add(Cinema.fromJson(data));
+        return cinema;
+      }
+    } catch (e) {
+      print(e);
     }
   }
 }

@@ -33,6 +33,8 @@ dependencies:
   flutter_bloc: ^7.0.0
   equatable:
   package_info:
+  google_maps: ^3.4.1
+
 
 
 
