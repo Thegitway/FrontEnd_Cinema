@@ -44,8 +44,7 @@ class DioService {
     try {
       dio = Dio();
       var response = await dio.post(
-        "http://localhost:8080/cinemaVille",
-        data: jsonEncode(ville.toJson()),
+        "http://localhost:8080/cinemaVille/${ville.id}",
       );
       if (response.statusCode == 200) {
         List<Cinema> cinema = [];
@@ -67,6 +66,7 @@ class DioService {
       if (response.statusCode == 200) {
         Ville ville;
         ville = Ville.fromJson(response.data);
+        print("omar " + ville.name + ville.id.toString());
         return ville;
       } else
         return null;
