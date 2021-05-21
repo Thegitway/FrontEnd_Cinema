@@ -43,7 +43,7 @@ class DioService {
   Future<List<Cinema>> getCinemaVille(Ville ville) async {
     try {
       dio = Dio();
-      var response = await dio.post(
+      var response = await dio.get(
         "http://localhost:8080/cinemaVille/${ville.id}",
       );
       if (response.statusCode == 200) {

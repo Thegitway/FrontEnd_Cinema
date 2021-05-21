@@ -17,7 +17,7 @@ class CinemaBloc<T> extends Bloc<CinemaEvent, CinemaState> {
       yield CinemaState.loading();
       try {
         List<Cinema> cinemas;
-        if (event.first)
+        if (event.first == true)
           cinemas = await _dioService
               .getCinemaVille(await _dioService.getFirstVille());
         else
