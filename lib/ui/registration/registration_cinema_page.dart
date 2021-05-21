@@ -1,9 +1,10 @@
+import 'package:cinema/api/DioServie.dart';
 import 'package:cinema/ui/widgets/CustomAppBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cinema/bloc/cinema_registration/cinema.dart';
+import 'package:cinema/bloc/cinema/cinema.dart';
 import 'package:package_info/package_info.dart';
 
 class CinemaPage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _CinemaPageState extends State<CinemaPage> {
 
   @override
   void initState() {
-    _bloc = CinemaBloc();
+    _bloc = CinemaBloc(RepositoryProvider.of<DioService>(context));
     super.initState();
   }
 
@@ -39,7 +40,7 @@ class _CinemaPageState extends State<CinemaPage> {
     BlocConsumer<CinemaBloc, CinemaState>(
       bloc: _bloc,
       listener: (context, state) {
-        if (state.currentState == CinemaCurrentState.loaded) {
+        if (state.currentState == CinemaCurrentState.Cinemaloaded) {
         } else if (state.currentState == CinemaCurrentState.error) {}
       },
       builder: (context, state) {

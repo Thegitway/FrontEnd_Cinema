@@ -1,3 +1,4 @@
+import 'package:cinema/model/Ville.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -9,9 +10,11 @@ abstract class CinemaEvent<T> extends Equatable {
   List<Object> get props => [];
 }
 
-class CinemaSubEvent extends CinemaEvent {
-  const CinemaSubEvent();
+class CinemaLoadingEvent extends CinemaEvent {
+  const CinemaLoadingEvent({this.ville, this.first});
+  final Ville ville;
+  final bool first;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [ville, first];
 }

@@ -40,6 +40,41 @@ class DioService {
     }
   }
 
+  Future<List<Cinema>> getCinemaVille(Ville ville) async {
+    try {
+      dio = Dio();
+      var response = await dio.post(
+        "http://localhost:8080/cinemaVille",
+        data: jsonEncode(ville.toJson()),
+      );
+      if (response.statusCode == 200) {
+        List<Cinema> cinema = [];
+        for (var data in response.data) cinema.add(Cinema.fromJson(data));
+        return cinema;
+      } else
+        return null;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<Ville> getFirstVille() async {
+    try {
+      dio = Dio();
+      var response = await dio.get(
+        "http://localhost:8080/villeFirst",
+      );
+      if (response.statusCode == 200) {
+        Ville ville;
+        ville = Ville.fromJson(response.data);
+        return ville;
+      } else
+        return null;
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<List<Ville>> getAllVille() async {
     try {
       dio = Dio();
