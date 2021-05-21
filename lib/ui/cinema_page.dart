@@ -1,5 +1,6 @@
 import 'package:cinema/api/DioServie.dart';
 import 'package:cinema/model/Cinema.dart';
+import 'package:cinema/model/Ville.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cinema/ui/widgets/CustomAppBar.dart';
@@ -16,18 +17,37 @@ class _CinemaPageState extends State<CinemaPage> {
     return Scaffold(
       appBar: CustomAppBar(context),
       body: FutureBuilder(
-        future: RepositoryProvider.of<DioService>(context).getAllCinema(),
+        future: RepositoryProvider.of<DioService>(context).getAllVille(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Cinema> cinemas = [];
-            cinemas = snapshot.data;
-
+            List<Ville> villes = [];
+            villes = snapshot.data;
             return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Table(
+                padding: const EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      for (Ville vil in villes)
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          child: MaterialButton(
+                            color: Theme.of(context).primaryColor,
+                            onPressed: () {},
+                            child: Text(vil.name),
+                          ),
+                        )
+                    ],
+                  ),
+                ))
+
+                //cinema
+                /* Table(
                 border: TableBorder.all(
                     width: 2, color: Theme.of(context).hintColor),
                 children: [
+
                   for (Cinema cin in cinemas)
                     TableRow(
                         decoration: BoxDecoration(color: Colors.grey[200]),
@@ -50,8 +70,8 @@ class _CinemaPageState extends State<CinemaPage> {
                           )
                         ])
                 ],
-              ),
-            );
+              ),*/
+                );
           } else
             return Center(
                 child: CircularProgressIndicator(
