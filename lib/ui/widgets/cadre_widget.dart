@@ -41,10 +41,13 @@ class _CadreWidgetState extends State<CadreWidget> {
 
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: widget.actions ?? [Container()],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: widget.actions ?? [Container()],
+              ),
             ),
           ),
           for (Widget kid in doubleItem(widget.kids))

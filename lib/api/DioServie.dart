@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cinema/model/Cinema.dart';
 import 'package:cinema/model/Movie.dart';
 import 'package:cinema/model/ProjectionFilm.dart';
@@ -7,7 +5,6 @@ import 'package:cinema/model/Salle.dart';
 import 'package:cinema/model/Seance.dart';
 import 'package:cinema/model/Ville.dart';
 import 'package:dio/dio.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:logger/logger.dart';
 
 import 'DioInterceptor.dart';
@@ -48,7 +45,7 @@ class DioService {
     try {
       dio = Dio();
       var response = await dio.get(
-        "http://localhost:8080/projectionFilmSeance/$salleId",
+        "http://localhost:8080/seanceSalle/$salleId",
       );
       if (response.statusCode == 200) {
         List<Seance> seance = [];
@@ -150,7 +147,6 @@ class DioService {
       if (response.statusCode == 200) {
         Ville ville;
         ville = Ville.fromJson(response.data);
-        print("omar " + ville.name + ville.id.toString());
         return ville;
       } else
         return null;

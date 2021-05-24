@@ -20,11 +20,11 @@ class Movie {
 
   Movie.fromJson(Map<String, dynamic> json) {
     this.id = json["id"] as int;
-    this.titre = json["id"].toString();
+    this.titre = json["titre"].toString();
     this.duree = json["duree"] as double;
     this.realisateur = json["realisateur"].toString();
     this.description = json["description"].toString();
-    this.photo = json["dateSortie"].toString();
+    this.photo = json["photo"].toString();
     this.dateSortie = json["dateSortie"] != null
         ? DateTime.parse(json['dateSortie'] as String)
         : null;

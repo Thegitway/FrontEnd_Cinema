@@ -1,6 +1,6 @@
 import 'package:cinema/model/Cinema.dart';
 import 'package:cinema/model/ProjectionFilm.dart';
-import 'package:google_maps/google_maps.dart';
+import 'package:cinema/model/Ville.dart';
 
 enum CinemaCurrentState {
   initial,
@@ -15,8 +15,10 @@ class CinemaState<T> {
   final dynamic error;
   final CinemaCurrentState currentState;
   final List<ProjectionFilm> pros;
+  final List<Ville> villes;
 
-  CinemaState({this.cinemas, this.pros, this.error, this.currentState});
+  CinemaState(
+      {this.cinemas, this.villes, this.pros, this.error, this.currentState});
 
   factory CinemaState.initial() =>
       CinemaState(currentState: CinemaCurrentState.initial);
@@ -24,8 +26,12 @@ class CinemaState<T> {
   factory CinemaState.loading() =>
       CinemaState(currentState: CinemaCurrentState.loading);
 
-  factory CinemaState.Cinemaloaded(List<Cinema> cinemas) => CinemaState(
-      cinemas: cinemas, currentState: CinemaCurrentState.Cinemaloaded);
+  factory CinemaState.Cinemaloaded(
+          {List<Cinema> cinemas, List<Ville> villes}) =>
+      CinemaState(
+          cinemas: cinemas,
+          villes: villes,
+          currentState: CinemaCurrentState.Cinemaloaded);
 
   factory CinemaState.ProjectionLoaded(List<ProjectionFilm> pros) =>
       CinemaState(
