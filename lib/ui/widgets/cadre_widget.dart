@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 @immutable
 class CadreWidget extends StatefulWidget {
-  const CadreWidget({Key key, this.title, this.width, this.kids})
+  const CadreWidget({Key key, this.actions, this.title, this.width, this.kids})
       : super(key: key);
 
   final String title;
   final List<Widget> kids;
   final double width;
-
+  final List<Widget> actions;
   @override
   _CadreWidgetState createState() => _CadreWidgetState();
 }
@@ -25,6 +25,7 @@ class _CadreWidgetState extends State<CadreWidget> {
           border: Border.all(width: 1, color: Colors.grey)),
       child: Column(
         children: [
+          //title
           Container(
             width: widget.width,
             child: Padding(
@@ -35,6 +36,16 @@ class _CadreWidgetState extends State<CadreWidget> {
                 color: Theme.of(context).primaryColor,
                 border:
                     Border(bottom: BorderSide(width: 1, color: Colors.grey))),
+          ),
+          //leading
+
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: widget.actions ?? [Container()],
+            ),
           ),
           for (Widget kid in doubleItem(widget.kids))
             Column(

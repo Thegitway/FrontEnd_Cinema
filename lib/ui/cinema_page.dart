@@ -16,13 +16,14 @@ class CinemaPage extends StatefulWidget {
 class _CinemaPageState extends State<CinemaPage> {
   CinemaBloc _bloc;
   int selectedVilleId = -1;
+  int selectedCinId = -1;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _bloc = CinemaBloc(RepositoryProvider.of<DioService>(context));
-    _bloc..add(CinemaLoadingEvent(first: true));
+    _bloc..add(CinemaVilleLoadingEvent(first: true));
   }
 
   @override
@@ -35,23 +36,22 @@ class _CinemaPageState extends State<CinemaPage> {
           body: FutureBuilder(
             future: RepositoryProvider.of<DioService>(context).getAllVille(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (state.currentState == CinemaCurrentState.loading) {
+                return Center(
+                    child: CircularProgressIndicator(
+                  backgroundColor: Colors.yellow[600],
+                ));
+              } else if (snapshot.hasData) {
                 List<Ville> villes = [];
                 villes = snapshot.data;
                 if (selectedVilleId == -1) selectedVilleId = villes.first.id;
+
                 return Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: SingleChildScrollView(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CadreWidget(
-                            title: "Spider Man",
-                            width: 200,
-                            kids: [
-                              FilmWidget(),
-                            ],
-                          ),
                           Column(
                             children: [
                               for (Ville vil in villes)
@@ -70,13 +70,41 @@ class _CinemaPageState extends State<CinemaPage> {
                                         ? () {}
                                         : () {
                                             selectedVilleId = vil.id;
-                                            _bloc.add(
-                                                CinemaLoadingEvent(ville: vil));
+                                            _bloc.add(CinemaVilleLoadingEvent(
+                                                ville: vil));
                                           },
                                     child: Text(vil.name),
                                   ),
                                 )
                             ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CadreWidget(
+                              actions: [
+                                for (Cinema cin in state.cinemas)
+                                  MaterialButton(
+                                    color: cin.id == selectedCinId
+                                        ? Theme.of(context).accentColor
+                                        : Theme.of(context).primaryColor,
+                                    onPressed: selectedCinId == cin.id
+                                        ? () {}
+                                        : () {
+                                            setState(() {
+                                              selectedCinId = cin.id;
+                                            });
+                                            _bloc.add(CinemaClickEvent(
+                                                cinema: state.cinemas.first));
+                                          },
+                                    child: Text(cin.name),
+                                  ),
+                              ],
+                              title: "Spider Man",
+                              width: 200,
+                              kids: [
+                                FilmWidget(),
+                              ],
+                            ),
                           ),
                           //cinema
                           (state.cinemas == null || state.cinemas.length == 0)
@@ -130,6 +158,18 @@ class _CinemaPageState extends State<CinemaPage> {
                         ],
                       ),
                     ));
+              } else if (state.currentState == CinemaCurrentState.error) {
+                return AlertDialog(
+                  title: Text("Sorry"),
+                  content: Text("network error, please try again"),
+                  actions: [
+                    MaterialButton(
+                        child: Text("ok"),
+                        onPressed: () {
+                          _bloc.add(CinemaVilleLoadingEvent(first: true));
+                        })
+                  ],
+                );
               } else
                 return Center(
                     child: CircularProgressIndicator(
