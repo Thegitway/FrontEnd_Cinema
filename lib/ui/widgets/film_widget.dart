@@ -26,12 +26,11 @@ class _FilmWidgetState extends State<FilmWidget> {
       kids: [
         Container(
           width: (widget.width / 2) * 0.4,
-          child: FittedBox(
-            fit: BoxFit.contain,
-            child: Image.network(
-              widget.movie?.photo ?? "",
-            ),
-          ),
+          child: widget.movie?.photo != null
+              ? Image.network(
+                  widget.movie?.photo ?? "",
+                )
+              : Container(),
         ),
         CadreWidget(
           width: (widget.width / 2) * 0.4,
